@@ -8,14 +8,21 @@ router.get('/', (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   Product.findAll({
-    include: [Category]
-    })
+    include: [
+      Category,
+      {
+        model: Tag,
+        through: ProductTag,
+        as: 'product_tag_id'
+      }
+    ]
+  })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
     })
-  });
+});
 
 // get one product
 router.get('/:id', (req, res) => {
@@ -27,11 +34,11 @@ router.get('/:id', (req, res) => {
     },
     include: [Category]
   })
-  .then(dbUserData => res.json(dbUserData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 // create new product

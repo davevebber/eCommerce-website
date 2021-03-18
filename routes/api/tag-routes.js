@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   // be sure to include its associated Product data
   Tag.findAll({
     // include: [ProductTag]
-    })
+  })
     .then(dbTagData => res.json(dbTagData))
     .catch(err => {
       console.log(err);
@@ -23,30 +23,26 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    // include: [Product]
+    include: [Product]
   })
-  .then(dbUserData => res.json(dbUserData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.post('/', (req, res) => {
   // create a new tag
-  Tag.create(
-    {
-    id: req.body.id
-    },
-    {
+  Tag.create({
+    id: req.body.id,
     tag_name: req.body.tag_name
-  },
-  )
-  .then(dbTagData => res.json(dbTagData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+  })
+    .then(dbTagData => res.json(dbTagData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.put('/:id', (req, res) => {
@@ -61,17 +57,17 @@ router.put('/:id', (req, res) => {
       }
     }
   )
-  .then(categoryUpdate => {
-    if (!categoryUpdate) {
-      res.status(404).json({ message: 'No category found with this id' });
-      return;
-    }
-    res.json(categoryUpdate);
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+    .then(categoryUpdate => {
+      if (!categoryUpdate) {
+        res.status(404).json({ message: 'No category found with this id' });
+        return;
+      }
+      res.json(categoryUpdate);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.delete('/:id', (req, res) => {
@@ -81,17 +77,17 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
-  .then(deleteCategory => {
-    if (!deleteCategory) {
-      res.status(404).json({ message: 'No category found with this id' });
-      return;
-    }
-    res.json(deleteCategory);
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+    .then(deleteCategory => {
+      if (!deleteCategory) {
+        res.status(404).json({ message: 'No category found with this id' });
+        return;
+      }
+      res.json(deleteCategory);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
