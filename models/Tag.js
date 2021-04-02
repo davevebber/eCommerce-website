@@ -17,6 +17,7 @@ Tag.init(
       type: DataTypes.STRING
     }
   },
+  
   {
     sequelize,
     timestamps: false,
