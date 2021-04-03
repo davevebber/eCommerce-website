@@ -13,15 +13,14 @@ router.get('/', (req, res) => {
       {
         model: Tag,
         through: ProductTag,
-        as: 'product_tag_id'
-      }
-    ]
+      },
+    ],
   })
-    .then(dbUserData => res.json(dbUserData))
-    .catch(err => {
+    .then((products) => res.json(products))
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
-    })
+    });
 });
 
 // get one product
@@ -32,23 +31,23 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    include: [Category]
+    include: [
+      Category,
+      {
+        model: Tag,
+        through: ProductTag,
+      },
+    ],
   })
-    .then(dbUserData => res.json(dbUserData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  .then((products) => res.json(products))
+  .catch((err) => {
+    console.log(err);
+    res.status(400).json(err);
+  });
 });
 
 // create new product
 router.post('/', (req, res) => {
-  Product.create({
-    product_name: req.body.title,
-    price: req.body.price,
-    stock: req.body.stock,
-    tagIds: req.body.stock
-  })
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -79,7 +78,7 @@ router.put('/:id', (req, res) => {
       id: req.params.id,
     },
   })
-    .then((productData) => {
+    .then((product) => {
       // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
@@ -127,9 +126,9 @@ router.delete('/:id', (req, res) => {
       }
       res.json(deleteProduct);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
-      res.status(500).json(err);
+      res.status(400).json(err);
     });
 });
 
