@@ -23,7 +23,7 @@ JavaScript
 Node
 
 ## Usage Information <a name="usage"></a>
-Start the server and then use POSTMAN or INSOMNIA to check the routes. Or localhost on your browser. Here is a walkthrough vieo explaing how the app works.
+Start the server and then use POSTMAN or INSOMNIA to check the routes. Or localhost on your browser. Here is a walk-through video explaining how the app works.
 
 video 1:
 https://drive.google.com/file/d/1at4HBbqFMoOpCglprGZdAAHwyiSlb0QF/view
