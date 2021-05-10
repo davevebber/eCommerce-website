@@ -16,11 +16,8 @@ router.get('/', (req, res) => {
       },
     ],
   })
-    .then((products) => res.json(products))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  .then((products) => res.status(200).json(products))
+  .catch((err) => res.status(400).json(err));
 });
 
 // get one product
@@ -39,11 +36,8 @@ router.get('/:id', (req, res) => {
       },
     ],
   })
-  .then((products) => res.json(products))
-  .catch((err) => {
-    console.log(err);
-    res.status(400).json(err);
-  });
+  .then((product) => res.status(200).json(product))
+  .catch((err) => res.status(400).json(err));
 });
 
 // create new product
@@ -63,12 +57,9 @@ router.post('/', (req, res) => {
       // if no product tags, just respond
       res.status(200).json(product);
     })
-    .then((productTagIds) => res.status(200).json(productTagIds))
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
-    });
-});
+    .then((product) => res.status(200).json(product))
+    .catch((err) => res.status(400).json(err));
+  });
 
 // update product
 router.put('/:id', (req, res) => {
@@ -106,10 +97,7 @@ router.put('/:id', (req, res) => {
       ]);
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
-    .catch((err) => {
-      // console.log(err);
-      res.status(400).json(err);
-    });
+    .catch((err) => { res.status(400).json(err)});
 });
 
 router.delete('/:id', (req, res) => {
@@ -119,17 +107,8 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
-    .then(deleteProduct => {
-      if (!deleteProduct) {
-        res.status(404).json({ message: 'No category found with this id' });
-        return;
-      }
-      res.json(deleteProduct);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
-    });
+  .then((product) => res.status(200).json(product))
+  .catch((err) => res.status(400).json(err));
 });
 
 module.exports = router;

@@ -8,10 +8,10 @@ router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
   Category.findAll({
-  include: [Product]
+    include: [Product]
   })
-  .then((category) => res.status(200).json(category))
-  .catch((err) => res.status(400).json(err));
+    .then((category) => res.status(200).json(category))
+    .catch((err) => res.status(400).json(err));
 });
 
 router.get('/:id', (req, res) => {
@@ -23,8 +23,8 @@ router.get('/:id', (req, res) => {
     },
     include: [Product]
   })
-  .then((category) => res.status(200).json(category))
-  .catch((err) => res.status(400).json(err));
+    .then((category) => res.status(200).json(category))
+    .catch((err) => res.status(400).json(err));
 });
 
 router.post('/', (req, res) => {
@@ -32,9 +32,9 @@ router.post('/', (req, res) => {
     id: req.body.id,
     category_name: req.body.category_name
   })
-  .then((categories) => res.json(categories))
-  .catch((err) => res.status(500).json(err));
-  });
+    .then((categories) => res.json(categories))
+    .catch((err) => res.status(500).json(err));
+});
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
@@ -48,19 +48,18 @@ router.put('/:id', (req, res) => {
       }
     }
   )
-  .then((category) => res.status(200).json(category))
-  .catch((err) => res.status(400).json(err));
+    .then((category) => res.status(200).json(category))
+    .catch((err) => res.status(400).json(err));
 });
 
 router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
   Category.destroy({
     where: {
-      id: req.params.id
+      id: req.params.id,
     },
   })
-  .then((category) => res.status(200).json(category))
-  .catch((err) => res.status(400).json(err));
+    .then((category) => res.status(200).json(category))
+    .catch((err) => res.status(400).json(err));
 });
 
 module.exports = router;
