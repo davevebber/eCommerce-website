@@ -23,7 +23,13 @@ JavaScript
 Node
 
 ## Usage Information <a name="usage"></a>
-Start the server and then use POSTMAN or INSOMNIA to check the routes. Or localhost on your browser
+Start the server and then use POSTMAN or INSOMNIA to check the routes. Or localhost on your browser. Here is a walkthrough vieo explaing how the app works.
+
+video 1:
+https://drive.google.com/file/d/1at4HBbqFMoOpCglprGZdAAHwyiSlb0QF/view
+
+video 2:
+https://drive.google.com/file/d/12lqS77w830eDqfjPZIz9yE-DFHAriQkH/view
 
 ## Installation <a name="install"></a>
 In the root folder of the project run npm install to install the needed packages
